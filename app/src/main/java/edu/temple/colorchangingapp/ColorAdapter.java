@@ -56,6 +56,7 @@ public class ColorAdapter extends BaseAdapter {
             textView = new TextView(context);
             textView.setTextSize(20);
             textView.setPadding(8, 8, 8, 8);
+            textView.setHeight(150);
         }
         else
             textView = (TextView) convertView;

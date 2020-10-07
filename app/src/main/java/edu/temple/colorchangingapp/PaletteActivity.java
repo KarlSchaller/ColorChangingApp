@@ -21,6 +21,7 @@ public class PaletteActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_palette);
+        setTitle("Palette Activity");
 
         grid = findViewById(R.id.grid);
         ColorAdapter adapter = new ColorAdapter(this);

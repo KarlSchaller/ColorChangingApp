@@ -13,6 +13,8 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 
 public class PaletteActivity extends AppCompatActivity {
 
+    public static final String EXTRA_COLOR = "color";
+    public static final String EXTRA_NAME = "name";
     GridView grid;
 
     @Override

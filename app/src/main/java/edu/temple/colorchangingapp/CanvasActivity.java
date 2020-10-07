@@ -3,8 +3,10 @@ package edu.temple.colorchangingapp;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.widget.TextView;
 
 public class CanvasActivity extends AppCompatActivity {
 
@@ -15,8 +17,12 @@ public class CanvasActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_canvas);
 
-        layout = findViewById(R.id.layout);
+        Intent intent = getIntent();
 
-        layout.setBackgroundColor(Color.BLACK);
+        layout = findViewById(R.id.layout);
+        layout.setBackgroundColor(intent.getIntExtra(PaletteActivity.EXTRA_COLOR, Color.WHITE));
+
+        TextView label = findViewById(R.id.label);
+        label.setText(intent.getStringExtra(PaletteActivity.EXTRA_NAME));
     }
 }

@@ -30,6 +30,8 @@ public class ColorAdapter extends BaseAdapter {
         this.colors.add("Red");
 //        this.colors.add("Transparent");
         this.colors.add("Yellow");
+        this.colors.add("Brown");
+        this.colors.add("Orange");
     }
 
     @Override
@@ -83,6 +85,10 @@ public class ColorAdapter extends BaseAdapter {
 //            textView.setBackgroundColor(Color.TRANSPARENT);
         else if (textView.getText().equals("Yellow"))
             textView.setBackgroundColor(Color.YELLOW);
+        else if (textView.getText().equals("Brown"))
+            textView.setBackgroundColor(Color.parseColor("#964B00"));
+        else if (textView.getText().equals("Orange"))
+            textView.setBackgroundColor(Color.parseColor("#FFA500"));
 
         return textView;
     }

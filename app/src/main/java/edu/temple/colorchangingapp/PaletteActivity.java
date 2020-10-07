@@ -1,12 +1,10 @@
 package edu.temple.colorchangingapp;
 
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
-import android.widget.Spinner;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -19,7 +17,7 @@ public class PaletteActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_palette);
 
         layout = findViewById(R.id.layout);
         grid = findViewById(R.id.grid);
@@ -29,7 +27,10 @@ public class PaletteActivity extends AppCompatActivity {
         grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                layout.setBackgroundColor(((ColorDrawable)view.getBackground()).getColor());
+                Intent intent = new Intent(PaletteActivity.this, CanvasActivity.class);
+                //intent.putExtra("", view.);
+                //layout.setBackgroundColor(((ColorDrawable)view.getBackground()).getColor());
+                PaletteActivity.this.startActivity(intent);
             }
         });
     }

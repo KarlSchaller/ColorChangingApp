@@ -20,7 +20,7 @@ public class ColorAdapter extends BaseAdapter {
 
         this.context = context;
 
-        Resources res = context.getResources();
+        Resources res = context.getResources(); // TODO MOVE COLORS TO MAIN ACTIVITY AND PASS AS PARAM
         colors = res.getStringArray(R.array.colors);
 //        this.colors.add("Black");
 //        this.colors.add("Transparent");

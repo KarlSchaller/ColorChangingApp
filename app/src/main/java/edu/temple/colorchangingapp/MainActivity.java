@@ -7,32 +7,38 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 public class MainActivity extends AppCompatActivity {
 
     public static final String EXTRA_COLOR = "color";
     public static final String EXTRA_NAME = "name";
-    GridView grid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        setTitle(getString(R.string.palette_label));
 
-        grid = findViewById(R.id.grid);
-        ColorAdapter adapter = new ColorAdapter(this);
-        grid.setAdapter(adapter);
+        PaletteFragment paletteFragment = new PaletteFragment();
+        CanvasFragment canvasFragment = new CanvasFragment();
 
-        grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        getSupportFragmentManager()
+                .beginTransaction()
+                .add(R.id.container_1, paletteFragment)
+                .add(R.id.container_2, canvasFragment)
+                .commit();
+
+//        grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 //                Intent intent = new Intent(MainActivity.this, CanvasActivity.class);
 //                intent.putExtra("color", ((ColorDrawable)view.getBackground()).getColor());
 //                intent.putExtra("name", ((TextView)view).getText());
 //                MainActivity.this.startActivity(intent);
-            }
-        });
+//            }
+//        });
+
 
 //        Intent intent = getIntent();
 //

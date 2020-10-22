@@ -5,15 +5,12 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import edu.temple.colorchangingapp.dummy.DummyContent;
+import android.widget.AdapterView;
+import android.widget.GridView;
 
 /**
  * A fragment representing a list of Items.
@@ -69,25 +66,18 @@ public class PaletteFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_palette_list, container, false);
 
-//        GridView grid = findViewById(R.id.grid);
-//        GridView gridView = new GridView();
-//        ColorAdapter adapter = new ColorAdapter(this);
-//        gridView.setAdapter(adapter);
 //        return inflater.inflate(R.layout.activity_main, container, false);
 
         // Set the adapter
-        if (view instanceof RecyclerView) {
+        if (view instanceof GridView) {
             Context context = view.getContext();
-            RecyclerView recyclerView = (RecyclerView) view;
-            if (mColumnCount <= 1) {
-                recyclerView.setLayoutManager(new LinearLayoutManager(context));
-            } else {
-                recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
-            }
-            recyclerView.setAdapter(new MyColorRecyclerViewAdapter(DummyContent.ITEMS));
-            recyclerView.setOnClickListener(new View.OnClickListener() {
+            GridView gridView = (GridView) view;
+
+            gridView.setNumColumns(mColumnCount);
+            gridView.setAdapter(new ColorAdapter(context));
+            gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
-                public void onClick(View v) {
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     parentActivity.click();
                 }
             });

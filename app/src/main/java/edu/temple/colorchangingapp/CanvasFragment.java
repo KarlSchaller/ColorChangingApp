@@ -8,6 +8,9 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -53,12 +56,23 @@ public class CanvasFragment extends Fragment {
         // Inflate the layout for this fragment
         l = inflater.inflate(R.layout.fragment_canvas, container, false);
 
-        changeColor(mDefaultColor);
+        changeColor(Color.BLUE);
+        changeText("test");
 
         return l;
     }
 
     public void changeColor(int color) {
-        l.setBackgroundColor(color);
+        if (l instanceof TextView) {
+            TextView textView = (TextView) l;
+            textView.setBackgroundColor(color);
+        }
+    }
+
+    public void changeText(String text) {
+        if (l instanceof TextView) {
+            TextView textView = (TextView) l;
+            textView.setText(text);
+        }
     }
 }

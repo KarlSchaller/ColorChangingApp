@@ -22,6 +22,10 @@ public class PaletteFragment extends Fragment {
 
     private static final String ARG_COLUMN_COUNT = "column-count";
     private int mColumnCount = 3;
+    private static final String ARG_COLOR_NAMES = "color-names";
+    private String[] mColorNames;
+    private static final String ARG_COLOR_VALUES = "color-values";
+    private int[] mColorValues;
 
     ClickInterface parentActivity;
 
@@ -33,10 +37,12 @@ public class PaletteFragment extends Fragment {
     }
 
     @SuppressWarnings("unused")
-    public static PaletteFragment newInstance(int columnCount) {
+    public static PaletteFragment newInstance(int columnCount, String[] colorNames, int[] colorValues) {
         PaletteFragment fragment = new PaletteFragment();
         Bundle args = new Bundle();
         args.putInt(ARG_COLUMN_COUNT, columnCount);
+        args.putStringArray(ARG_COLOR_NAMES, colorNames);
+        args.putIntArray(ARG_COLOR_VALUES, colorValues);
         fragment.setArguments(args);
         return fragment;
     }
@@ -48,7 +54,7 @@ public class PaletteFragment extends Fragment {
         if (context instanceof ClickInterface)
             parentActivity = (ClickInterface) context;
         else
-            throw new RuntimeException("You must implement the asdfas interface to attach this fragment");
+            throw new RuntimeException("You must implement the ClickInterface interface to attach this fragment");
     }
 
     @Override
@@ -58,6 +64,8 @@ public class PaletteFragment extends Fragment {
         Bundle args;
         if ((args = getArguments()) != null) {
             mColumnCount = args.getInt(ARG_COLUMN_COUNT);
+            mColorNames = args.getStringArray(ARG_COLOR_NAMES);
+            mColorValues = args.getIntArray(ARG_COLOR_VALUES);
         }
         else {
             mColumnCount = 3;
@@ -69,15 +77,13 @@ public class PaletteFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_palette_list, container, false);
 
-//        return inflater.inflate(R.layout.activity_main, container, false);
-
         // Set the adapter
         if (view instanceof GridView) {
             Context context = view.getContext();
             GridView gridView = (GridView) view;
 
             gridView.setNumColumns(mColumnCount);
-            gridView.setAdapter(new ColorAdapter(context));
+            gridView.setAdapter(new ColorAdapter(context, mColorNames, mColorValues));
             gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

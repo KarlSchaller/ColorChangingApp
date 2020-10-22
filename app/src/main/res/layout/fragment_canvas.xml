@@ -7,4 +7,4 @@
     android:gravity="center"
     android:textSize="30sp"
     tools:context=".CanvasFragment"
-    tools:text="testtest" />
+    tools:text="content" />

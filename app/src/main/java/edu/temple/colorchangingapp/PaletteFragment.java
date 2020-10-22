@@ -1,6 +1,8 @@
 package edu.temple.colorchangingapp;
 
 import android.content.Context;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -11,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.TextView;
 
 /**
  * A fragment representing a list of Items.
@@ -78,7 +81,10 @@ public class PaletteFragment extends Fragment {
             gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    parentActivity.click();
+                    if (view instanceof TextView) {
+                        TextView textView = (TextView) view;
+                        parentActivity.click(((ColorDrawable)textView.getBackground()).getColor(), textView.getText());
+                    }
                 }
             });
         }
@@ -87,6 +93,6 @@ public class PaletteFragment extends Fragment {
     }
 
     interface ClickInterface {
-        void click();
+        void click(int color, CharSequence text);
     }
 }

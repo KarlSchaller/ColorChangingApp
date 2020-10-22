@@ -4,4 +4,7 @@
     android:id="@+id/colorDisplay"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CanvasFragment" />
+    android:gravity="center"
+    android:textSize="30sp"
+    tools:context=".CanvasFragment"
+    tools:text="testtest" />

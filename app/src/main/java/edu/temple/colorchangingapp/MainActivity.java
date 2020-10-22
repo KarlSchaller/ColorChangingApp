@@ -2,6 +2,7 @@ package edu.temple.colorchangingapp;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -16,13 +17,15 @@ public class MainActivity extends AppCompatActivity implements PaletteFragment.C
     public static final String EXTRA_COLOR = "color";
     public static final String EXTRA_NAME = "name";
 
+    CanvasFragment canvasFragment;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         PaletteFragment paletteFragment = PaletteFragment.newInstance(3);
-        CanvasFragment canvasFragment = CanvasFragment.newInstance(Color.RED);
+        canvasFragment = new CanvasFragment();
 
         getSupportFragmentManager()
                 .beginTransaction()
@@ -52,7 +55,9 @@ public class MainActivity extends AppCompatActivity implements PaletteFragment.C
     }
 
     @Override
-    public void click() {
+    public void click(int color, CharSequence text) {
+        canvasFragment.changeColor(color);
+        canvasFragment.changeText(text);
 
     }
 }

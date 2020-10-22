@@ -16,18 +16,16 @@ import android.view.ViewGroup;
  */
 public class CanvasFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_DEFAULT_COLOR = "color";
-
-    // TODO: Rename and change types of parameters
     private int mDefaultColor;
+
+    View l;
 
     public CanvasFragment() {
         // Required empty public constructor
     }
 
-    // TODO: Rename and change types and number of parameters
     public static CanvasFragment newInstance(int defaultColor) {
         CanvasFragment fragment = new CanvasFragment();
         Bundle args = new Bundle();
@@ -53,10 +51,14 @@ public class CanvasFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View l = inflater.inflate(R.layout.fragment_canvas, container, false);
+        l = inflater.inflate(R.layout.fragment_canvas, container, false);
 
-        l.findViewById(R.id.colorDisplay);
+        changeColor(mDefaultColor);
 
         return l;
+    }
+
+    public void changeColor(int color) {
+        l.setBackgroundColor(color);
     }
 }

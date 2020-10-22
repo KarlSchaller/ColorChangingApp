@@ -1,6 +1,7 @@
 package edu.temple.colorchangingapp;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -10,7 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements PaletteFragment.ClickInterface {
 
     public static final String EXTRA_COLOR = "color";
     public static final String EXTRA_NAME = "name";
@@ -20,8 +21,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        PaletteFragment paletteFragment = new PaletteFragment();
-        CanvasFragment canvasFragment = new CanvasFragment();
+        PaletteFragment paletteFragment = PaletteFragment.newInstance(3);
+        CanvasFragment canvasFragment = CanvasFragment.newInstance(Color.RED);
 
         getSupportFragmentManager()
                 .beginTransaction()
@@ -47,6 +48,11 @@ public class MainActivity extends AppCompatActivity {
 //
 //        TextView label = findViewById(R.id.label);
 //        label.setText(intent.getStringExtra(MainActivity.EXTRA_NAME));
+
+    }
+
+    @Override
+    public void click() {
 
     }
 }

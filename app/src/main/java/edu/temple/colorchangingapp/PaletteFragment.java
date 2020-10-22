@@ -20,12 +20,10 @@ import edu.temple.colorchangingapp.dummy.DummyContent;
  */
 public class PaletteFragment extends Fragment {
 
-    // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
-    // TODO: Customize parameters
     private int mColumnCount = 3;
 
-    myInterface parentActivity;
+    ClickInterface parentActivity;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -34,7 +32,6 @@ public class PaletteFragment extends Fragment {
     public PaletteFragment() {
     }
 
-    // TODO: Customize parameter initialization
     @SuppressWarnings("unused")
     public static PaletteFragment newInstance(int columnCount) {
         PaletteFragment fragment = new PaletteFragment();
@@ -48,8 +45,8 @@ public class PaletteFragment extends Fragment {
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
 
-        if (context instanceof myInterface)
-            parentActivity = (myInterface) context;
+        if (context instanceof ClickInterface)
+            parentActivity = (ClickInterface) context;
         else
             throw new RuntimeException("You must implement the asdfas interface to attach this fragment");
     }
@@ -88,11 +85,18 @@ public class PaletteFragment extends Fragment {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
             recyclerView.setAdapter(new MyColorRecyclerViewAdapter(DummyContent.ITEMS));
+            recyclerView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    parentActivity.click();
+                }
+            });
         }
+
         return view;
     }
 
-    interface myInterface { //todo
-        void myMethod();
+    interface ClickInterface {
+        void click();
     }
 }
